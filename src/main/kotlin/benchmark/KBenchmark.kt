@@ -7,12 +7,11 @@ import java.util.concurrent.TimeUnit.NANOSECONDS
 
 @State(Scope.Benchmark)
 @Fork(1)
-@Warmup(iterations = 5)
-@Measurement(iterations = 5)
+@Warmup(iterations = 15)
+@Measurement(iterations = 15)
 @BenchmarkMode(AverageTime)
 @OutputTimeUnit(NANOSECONDS)
 
-// mvn clean install && java -jar target/benchmarks.jar
 
 open class KBenchmark {
 

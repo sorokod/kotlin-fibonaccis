@@ -1,6 +1,5 @@
 package benchmark
 
-// https://blog.des.io/posts/2018-03-08-fibonacci.html
 
 fun fibNaive(n: Int): Int =
         when (n) {
@@ -14,11 +13,11 @@ fun fibCached(n: Int): Int {
     fun fibCachedHelper(n: Int, cache: MutableMap<Int, Int>): Int =
 
             cache.getOrPut(n) {
-                val a = cache.getOrPut(n - 2) {
-                    fibCachedHelper(n - 2, cache)
-                }
-                val b = cache.getOrPut(n - 1) {
+                val a = cache.getOrPut(n - 1) {
                     fibCachedHelper(n - 1, cache)
+                }
+                val b = cache.getOrPut(n - 2) {
+                    fibCachedHelper(n - 2, cache)
                 }
                 a + b
             }
