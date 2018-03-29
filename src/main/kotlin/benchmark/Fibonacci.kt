@@ -8,22 +8,12 @@ fun fibNaive(n: Int): Int =
         }
 
 
-fun fibCached(n: Int): Int {
+fun fibCached(n: Int, cache: MutableMap<Int, Int> = mutableMapOf(Pair(0, 0), Pair(1, 1))): Int =
 
-    fun fibCachedHelper(n: Int, cache: MutableMap<Int, Int>): Int =
-
-            cache.getOrPut(n) {
-                val a = cache.getOrPut(n - 1) {
-                    fibCachedHelper(n - 1, cache)
-                }
-                val b = cache.getOrPut(n - 2) {
-                    fibCachedHelper(n - 2, cache)
-                }
-                a + b
-            }
-
-    return fibCachedHelper(n, mutableMapOf(Pair(0, 0), Pair(1, 1)))
-}
+        cache.getOrPut(n) {
+            cache.getOrPut(n - 1) { fibCached(n - 1, cache) } +
+            cache.getOrPut(n - 2) { fibCached(n - 2, cache) }
+        }
 
 
 fun T(p: Pair<Int, Int>): Pair<Int, Int> = Pair(p.first + p.second, p.first)
